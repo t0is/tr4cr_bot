@@ -39,7 +39,7 @@ client.on('message', (channel, tags, message, self) => {
     message.toLowerCase().includes("madmong") || 
     message.toLowerCase().includes("madmon") || 
     message.toLowerCase().includes("mekong")) && 
-    (tags.username.toLowerCase() !== "nightbot" || tags.username.toLowerCase() !== "streamelements")
+    (tags.username.toLowerCase() !== "nightbot" && tags.username.toLowerCase() !== "streamelements")
   )
   
 
