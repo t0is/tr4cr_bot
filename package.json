@@ -12,7 +12,15 @@
   "dependencies": {
     "@slack/client": "^5.0.2",
     "dotenv": "^9.0.0",
-    "tmi.js": "^1.5.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "handlebars": "^4.7.7",
+    "jquery": "^3.6.0",
+    "passport": "^0.4.1",
+    "passport-oauth": "^1.0.0",
+    "request": "^2.88.2",
+    "tmi.js": "^1.8.3",
+    "twitch-get-stream": "^0.6.0",
     "twitch-js": "^2.0.0-beta.42"
   }
 }
