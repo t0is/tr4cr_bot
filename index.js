@@ -8,7 +8,7 @@ const async = require("async");
 var accessToken = '';
 const tmi = require('tmi.js');
 
-var liveChannels = [''];
+var liveChannels = [];
 
 var channelsList = ['Agraelus', 'CzechCloud', 'PimpCSGO', 'ArcadeBulls', 'Freezecz', 'Astatoro', 'dafran',
   'Xnapycz', 'LexVeldhuis', 'Claina', 'Kokiii_', 'Patrikturi', 'STYKO', 'forsen', 'FlyGunCZ', 'Batmanova',
@@ -16,7 +16,20 @@ var channelsList = ['Agraelus', 'CzechCloud', 'PimpCSGO', 'ArcadeBulls', 'Freeze
   'Mrtweeday', 'TenSterakdary', 'nikdohonehleda'];
 
 
-  var botIgnore = ['oliveruvotrok', 'nightbot', 'streamelements', 'botalfr3d'];
+//var channelsList = ['nikdohonehleda'];
+
+var botIgnore = ['oliveruvotrok', 'nightbot', 'streamelements', 'botalfr3d'];
+
+
+var messageLog = [];
+
+
+class slackMessage {
+    constructor(text, id){
+        this.text = text;
+        this.id = id;
+    }
+}
 
 const options = {
   url: 'https://id.twitch.tv/oauth2/token',
@@ -48,7 +61,7 @@ const express = require('express')
 const app = express();
 const port = process.env.PORT || 3000;
 //const herokuApp = process.env.HEROKU_APP || null;
-const youtubeFetchTimeout = 60000;
+const youtubeFetchTimeout = 1500000;
 
 const web = new WebClient(slack_token);
 const slack_channel_ID = 'C021720QLE8';
@@ -176,7 +189,7 @@ async function fetchLiveStreamStatus() {
                             });
                             console.log(`Successfully send message in conversation ${slack_online_update}`);
                             })();
-
+                        
 
                         }
                     } else {
@@ -253,6 +266,62 @@ client.on('message', (channel, tags, message, self) => {
     }
     
 
+    if(tags.username.toLowerCase() === "madmonq"){
+
+        var sent = false;
+        var uname = message.split(' ')[0].replace('@', '');
+        
+        messageLog.every(function(msgL){
+
+            if(msgL.text.includes(uname)){
+
+
+                (async () => {
+
+                   
+                  const result = await web.chat.postMessage({
+                    text: tags.username + ": " + message,
+                    channel: slack_channel_ID,
+                    thread_ts: msgL.id
+                  });
+                
+                  // The result contains an identifier for the message, `ts`.
+                  console.log(`Successfully send message ${result.ts} in conversation ${slack_channel_ID}`);
+                  
+                })();
+                
+                sent = true;
+                return false;
+            }
+            
+        });
+
+        if (!sent){
+
+
+            (async () => {
+
+                   
+                const result = await web.chat.postMessage({
+                  text: tags.username + ": " + message,
+                  channel: slack_channel_ID,
+                  
+                });
+              
+                // The result contains an identifier for the message, `ts`.
+                console.log(`Successfully send message ${result.ts} in conversation ${slack_channel_ID}`);
+                
+              })();
+        }
+
+
+    }
+
+
+
+
+
+
   if((    message.toLowerCase().includes("madmonq") || 
     message.toLowerCase().includes("madmong") || 
     message.toLowerCase().includes("madmon") || 
@@ -263,23 +332,30 @@ client.on('message', (channel, tags, message, self) => {
 
  // if (message.toLowerCase().includes("!dabing"))
   {
-    var msg_output = channel + "--> " + tags.username + ": " + message;
-    //var msg_output = tags.username + ": " + message;
-    console.log(msg_output);
+    
     //client.say(channel, 'hueuhe');
 
     
     (async () => {
 
+        var msg_output = new slackMessage(tags.username + ": " + message, '');  
+        //var msg_output = tags.username + ": " + message;
+        console.log(channel + "--> " + msg_output.text);
       // Post a message to the channel, and await the result.
       // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
       const result = await web.chat.postMessage({
-        text: msg_output,
+        text: channel + "--> " + msg_output.text,
         channel: slack_channel_ID
       });
     
       // The result contains an identifier for the message, `ts`.
       console.log(`Successfully send message ${result.ts} in conversation ${slack_channel_ID}`);
+      msg_output.id = result.ts;
+
+      if (messageLog.length > 200){
+          messageLog.pop();
+      }
+      messageLog.unshift(msg_output);
     })();
     
  
