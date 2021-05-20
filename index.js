@@ -4,7 +4,7 @@ const express = require('express')
 const app = express();
 const port = process.env.PORT || 3000;
 //const herokuApp = process.env.HEROKU_APP || null;
-const youtubeFetchTimeout = 5;
+const youtubeFetchTimeout = 60000;
 const slack_online_update = 'C0225846R9B';
 
 const youtubeApiKey = process.env.YOUTUBE_API_KEY;
