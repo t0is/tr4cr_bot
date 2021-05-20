@@ -273,7 +273,7 @@ client.on('message', (channel, tags, message, self) => {
         
         messageLog.every(function(msgL){
 
-            if(msgL.text.includes(uname)){
+            if(msgL.text.includes(uname).toLowerCase()){
 
 
                 (async () => {
