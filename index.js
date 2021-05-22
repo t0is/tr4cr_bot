@@ -13,7 +13,7 @@ var liveChannels = [];
 var channelsList = ['Agraelus', 'CzechCloud', 'PimpCSGO', 'ArcadeBulls', 'Freezecz', 'Astatoro', 'dafran',
   'Xnapycz', 'LexVeldhuis', 'Claina', 'Kokiii_', 'Patrikturi', 'STYKO', 'forsen', 'FlyGunCZ', 'Batmanova',
   'liveoliverr', 'Artix', 'resttpowered', 'Herdyn', 'spajKK', 'bladeito', 'marty_vole', 'KuruHS',
-  'Mrtweeday', 'TenSterakdary', 'nikdohonehleda'];
+  'Mrtweeday', 'TenSterakdary', 'nikdohonehleda', 'papaplatte', 'revedtv', 'mirza_jahic'];
 
 
 //var channelsList = ['nikdohonehleda'];
