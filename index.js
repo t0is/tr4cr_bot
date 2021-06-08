@@ -14,13 +14,16 @@ var liveChannels = [];
 var streamersCZ = ['Agraelus', 'CzechCloud', 'ArcadeBulls', 'Freezecz', 
 'Astatoro', 'Xnapycz','Claina', 'Kokiii_', 'Patrikturi', 'STYKO', 'FlyGunCZ', 'Batmanova', 
 'liveoliverr', 'Artix', 'resttpowered', 'Herdyn', 'spajKK', 'bladeito', 'marty_vole', 
-'TenSterakdary', 'nikdohonehleda']
+'TenSterakdary', 'nikdohonehleda'].map(v => v.toLowerCase());
 
-var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen','KuruHS']
-var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic'] 
-var streamersFR = []
+var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen','KuruHS'].map(v => v.toLowerCase());
+var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic'].map(v => v.toLowerCase()); 
+var streamersFR = [].map(v => v.toLowerCase());
 
 var channelsList = streamersEN.concat(streamersDE, streamersFR, streamersCZ);
+
+
+
 
 //var channelsList = ['nikdohonehleda'];
 
@@ -71,13 +74,13 @@ const youtubeFetchTimeout = 1500000;
 
 const web = new WebClient(slack_token);
 const slack_channel_ID = 'C021720QLE8';
-const slack_online_update = 'C0225846R9B';
+//const slack_online_update = 'C0225846R9B';
 
 
 ///////TEST TEST TEST///////
 
 //const slack_channel_ID = 'C022500TU15';
-//const slack_online_update = 'C022500TU15';
+const slack_online_update = 'C022500TU15';
 
 const youtubeApiKey = process.env.YOUTUBE_API_KEY;
 const youtubeApiUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&eventType=live&type=video';
@@ -249,7 +252,7 @@ app.listen(port, () => {
         }
         
         liveRequest(body.access_token);
-        console.log(res);
+        //console.log(res);
         
       });
     },5000);
@@ -279,7 +282,7 @@ client.on('message', (channel, tags, message, self) => {
 
                 (async () => {
 
-                  var slID = getSlackChannelID(channel.replace('#', ''));
+                  var slID = getSlackChannelID(channel.replace('#', '').toLowerCase());
                   const result = await web.chat.postMessage({
                     text: tags.username + ": " + message,
                     channel: slID,
@@ -302,7 +305,7 @@ client.on('message', (channel, tags, message, self) => {
 
             (async () => {
 
-                var slID = getSlackChannelID(channel.replace('#', ''));
+                var slID = getSlackChannelID(channel.replace('#', '').toLowerCase());
                 const result = await web.chat.postMessage({
                   text: channel + "--> " + tags.username + ": " + message,
                   channel: slID,
@@ -343,7 +346,7 @@ client.on('message', (channel, tags, message, self) => {
         //var msg_output = tags.username + ": " + message;
         console.log(channel + "--> " + msg_output.text);
       // Post a message to the channel, and await the result.
-      var slID = getSlackChannelID(channel.replace('#', ''));
+      var slID = getSlackChannelID(channel.replace('#', '').toLowerCase());
       // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
       const result = await web.chat.postMessage({
         text: channel + "--> " + msg_output.text,
