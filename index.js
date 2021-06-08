@@ -10,15 +10,21 @@ const tmi = require('tmi.js');
 
 var liveChannels = [];
 
-var channelsList = ['Agraelus', 'CzechCloud', 'PimpCSGO', 'ArcadeBulls', 'Freezecz', 'Astatoro', 'dafran',
-  'Xnapycz', 'LexVeldhuis', 'Claina', 'Kokiii_', 'Patrikturi', 'STYKO', 'forsen', 'FlyGunCZ', 'Batmanova',
-  'liveoliverr', 'Artix', 'resttpowered', 'Herdyn', 'spajKK', 'bladeito', 'marty_vole', 'KuruHS',
-  'Mrtweeday', 'TenSterakdary', 'nikdohonehleda', 'papaplatte', 'revedtv', 'mirza_jahic'];
 
+var streamersCZ = ['Agraelus', 'CzechCloud', 'ArcadeBulls', 'Freezecz', 
+'Astatoro', 'Xnapycz','Claina', 'Kokiii_', 'Patrikturi', 'STYKO', 'FlyGunCZ', 'Batmanova', 
+'liveoliverr', 'Artix', 'resttpowered', 'Herdyn', 'spajKK', 'bladeito', 'marty_vole', 
+'TenSterakdary', 'nikdohonehleda']
+
+var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen','KuruHS']
+var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic'] 
+var streamersFR = []
+
+var channelsList = streamersEN.concat(streamersDE, streamersFR, streamersCZ);
 
 //var channelsList = ['nikdohonehleda'];
 
-var botIgnore = ['oliveruvotrok', 'nightbot', 'streamelements', 'botalfr3d'];
+var botIgnore = ['oliveruvotrok', 'nightbot', 'streamelements', 'botalfr3d', 'madmonkeyv2'];
 
 
 var messageLog = [];
@@ -42,7 +48,7 @@ const options = {
 };
 
 const client = new tmi.Client({
-  options: { debug: true },
+  options: { debug: false },
   connection: {
     secure: true,
     reconnect: true
@@ -80,8 +86,14 @@ const youtubeApiUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet
 
 const youtubeChannels = [
     {
+        channelName: 'DuklockPlus',
         channelId: 'UCIAbC7emlDQs-dmgW4GlgnA',
         channelUrl: 'https://www.youtube.com/channel/UCIAbC7emlDQs-dmgW4GlgnA'
+    },
+    {
+      channelName: 'Sterakdary',
+      channelId: 'UCYsS3SON69FIr-K3E3Czvpw',
+      channelUrl: 'https://www.youtube.com/channel/UCYsS3SON69FIr-K3E3Czvpw'
     }
 ];
 
@@ -121,6 +133,7 @@ function liveRequest(accessToken){
           //console.log('Status: ${res.statusCode}');
           
           try{
+            //console.log(res);
             //console.log(JSON.parse(body).data[0].user_name + " " +JSON.parse(body).data[0].type);
             if (!liveChannels.includes(JSON.parse(body).data[0].user_name)){
               liveChannels.push(JSON.parse(body).data[0].user_name);
@@ -135,11 +148,14 @@ function liveRequest(accessToken){
                 });
               
                 // The result contains an identifier for the message, `ts`.
-                console.log(`Successfully send message ${result.ts} in conversation ${slack_channel_ID}`);
+                console.log(`Successfully send message ${result.ts} in conversation ${slack_online_update}`);
               })();
               
               //console.log('pagman')
               //slack notif 
+            }
+            else {
+              console.log("furt stejni live: " + liveChannels);
             }
           
             //console.log('parsnul jsem body'); 
@@ -147,6 +163,7 @@ function liveRequest(accessToken){
           }
           catch (e) {
             liveChannels = liveChannels.filter(item => item !== streamName)
+            //console.log("ZMENAZMENAZMENAZMENAZMENA: " + liveChannels);
             //return null;
           }
         });
@@ -160,11 +177,11 @@ function liveRequest(accessToken){
 
 /////////////////////////////////////////////
 
-var dukName = 'DuklockPlus';
+
 async function fetchLiveStreamStatus() {
     try {
-        // for(const youtubeChannel of youtubeChannels) {
-            const youtubeChannel = youtubeChannels[0];
+         for(const youtubeChannel of youtubeChannels) {
+            //const youtubeChannel = youtubeChannels[0];
             console.log('Polling for ', JSON.stringify(youtubeChannel));
             const url = `${youtubeApiUrl}&channelId=${youtubeChannel.channelId}&key=${youtubeApiKey}`;
             const response = await fetch(url);
@@ -177,10 +194,10 @@ async function fetchLiveStreamStatus() {
                     if(!activeLiveStreams.has(element.id.videoId)) {
                         console.log(element);
                         activeLiveStreams.add(element.id.videoId);
-                        if (!liveChannels.includes(dukName)){
-                            liveChannels.push(dukName);
+                        if (!liveChannels.includes(youtubeChanel.channelName)){
+                            liveChannels.push(youtubeChanel.channelName);
                             (async () => {
-                            var msg_output = "DuklockPlus is now live on YouTube.";
+                            var msg_output = youtubeChanel.channelName + "is now live on YouTube.";
                             // Post a message to the channel, and await the result.
                             // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
                             const result = await web.chat.postMessage({
@@ -198,57 +215,41 @@ async function fetchLiveStreamStatus() {
                 });
             }
             else {
-              console.log ('not active now');
+              console.log (youtubeChanel.channelName + 'not active now');
               liveChannels = liveChannels.filter(item => item !== dukName);
             }
-        // }
+         }
     } catch (error) {
         console.error(error);
     }
 }
 
 
-/*
-async function postToDiscord(json) {
-    const resp = fetch(discordApiUrl, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        redirect: 'follow',
-        referrer: 'no-referrer',
-        body: JSON.stringify(json)
-    }).catch(error => console.log('Discord POST failed.', JSON.stringify(json), error));
 
-    const content = await resp.json();
-    console.log('Discord response', content); 
-}
 
-async function herokuKeepAlive() {
-    try {
-        const response = await fetch(herokuApp);
-        console.log('Heroku Keep-Alive Success')
-    } catch(error) {
-        console.error(error);
-    }
-}
-*/
-//app.get('/', (req, res) => res.send('Shhh! Im busy monitoring Youtube Channels.'));
-//////////////////
+
+
+
+
+
+
+
+
+
 
 app.listen(port, () => {
-    console.log(`App listening on port ${port}!`)
+    console.log(`App listening on port ${port}!`);
     setInterval(fetchLiveStreamStatus, youtubeFetchTimeout);
 
     // check jestli je live
-    setTimeout(() => {
+    setInterval(() => {
     request.post(options, (err,res,body)=>{
         if(err){
             return console.log(err);
         }
         
-        liveRequest(body.access_token)
+        liveRequest(body.access_token);
+        console.log(res);
         
       });
     },5000);
@@ -278,15 +279,15 @@ client.on('message', (channel, tags, message, self) => {
 
                 (async () => {
 
-                   
+                  var slID = getSlackChannelID(channel.replace('#', ''));
                   const result = await web.chat.postMessage({
                     text: tags.username + ": " + message,
-                    channel: slack_channel_ID,
+                    channel: slID,
                     thread_ts: msgL.id
                   });
                 
                   // The result contains an identifier for the message, `ts`.
-                  console.log(`Successfully send message ${result.ts} in conversation ${slack_channel_ID}`);
+                  console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
                   
                 })();
                 
@@ -301,15 +302,15 @@ client.on('message', (channel, tags, message, self) => {
 
             (async () => {
 
-                   
+                var slID = getSlackChannelID(channel.replace('#', ''));
                 const result = await web.chat.postMessage({
-                  text: tags.username + ": " + message,
-                  channel: slack_channel_ID,
+                  text: channel + "--> " + tags.username + ": " + message,
+                  channel: slID,
                   
                 });
               
                 // The result contains an identifier for the message, `ts`.
-                console.log(`Successfully send message ${result.ts} in conversation ${slack_channel_ID}`);
+                console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
                 
               })();
         }
@@ -342,14 +343,15 @@ client.on('message', (channel, tags, message, self) => {
         //var msg_output = tags.username + ": " + message;
         console.log(channel + "--> " + msg_output.text);
       // Post a message to the channel, and await the result.
+      var slID = getSlackChannelID(channel.replace('#', ''));
       // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
       const result = await web.chat.postMessage({
         text: channel + "--> " + msg_output.text,
-        channel: slack_channel_ID
+        channel: slID
       });
     
       // The result contains an identifier for the message, `ts`.
-      console.log(`Successfully send message ${result.ts} in conversation ${slack_channel_ID}`);
+      console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
       msg_output.id = result.ts;
 
       if (messageLog.length > 200){
@@ -363,7 +365,27 @@ client.on('message', (channel, tags, message, self) => {
 
 });
 
-console.log("konec, jedem async")
+console.log("konec, jedem async");
+
+
+
+
+function getSlackChannelID(channel){
+
+  if(streamersCZ.includes(channel)){
+    return 'C021720QLE8'  // CZ channel slack
+  }
+  else if(streamersEN.includes(channel)){
+    return 'C024KAVJFL4'  // EN channel slack
+  }
+  else if(streamersDE.includes(channel)){
+    return 'C024A3TBNNR'  // DE channel slack
+  }
+  else if(streamersFR.includes(channel)){
+    return 'C025309PJ2U'  // FR channel slack
+  }
+  
+}
 
 
 

@@ -22,6 +22,7 @@
     "passport-oauth": "^1.0.0",
     "pm2": "^4.5.6",
     "request": "^2.88.2",
+    "textmagic-rest-client": "^1.0.11",
     "tmi.js": "^1.8.3",
     "twitch-js": "^2.0.0-beta.42"
   }
