@@ -74,13 +74,13 @@ const youtubeFetchTimeout = 1500000;
 
 const web = new WebClient(slack_token);
 const slack_channel_ID = 'C021720QLE8';
-//const slack_online_update = 'C0225846R9B';
+const slack_online_update = 'C0225846R9B';
 
 
 ///////TEST TEST TEST///////
 
 //const slack_channel_ID = 'C022500TU15';
-const slack_online_update = 'C022500TU15';
+//const slack_online_update = 'C022500TU15';
 
 const youtubeApiKey = process.env.YOUTUBE_API_KEY;
 const youtubeApiUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&eventType=live&type=video';
