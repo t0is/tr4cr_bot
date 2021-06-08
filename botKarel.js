@@ -160,7 +160,7 @@ client.on('message', (channel, tags, message, self) => {
 
       var iq=Math.round(Math.random(10)*(1000000));
 
-      client.say(channel, "/me " + name + "má " + Math.floor(iq) + " mozkových buněk.");
+      client.say(channel, "/me " + name + " má " + Math.floor(iq) + " mozkových buněk.");
     }
 
 
