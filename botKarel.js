@@ -47,12 +47,6 @@ const client = new tmi.Client({
 
 
 
-var emoteTrain = [];
-
-var seconds = 0;
-var timer = setInterval(incrementSeconds, 1000);
-
-
 client.connect();
 
 
@@ -154,17 +148,39 @@ client.on('message', (channel, tags, message, self) => {
       client.say(channel, "/me " + name + " " + prsa+ "-"+ pas + "-" + boky + " " + r[Math.floor(Math.random() * r.length)]);
     }
 
+
+    if(message.toLowerCase().startsWith("!mozek")){
+
+      var input = message.split(' ');
+      var name;
+      if (input.length < 2) 
+        name = tags.username;
+      else 
+        name = input[1];
+
+      var iq=Math.round(Math.random(10)*(1000000));
+
+      client.say(channel, "/me " + name + "má " + Math.floor(iq) + " mozkových buněk.");
+    }
+
+
+
+
+
+
+
+
     if(countOccur(message.split(' '), "pepeJAM")){
 
       client.say(channel, "pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM pepeJAM");
     }
 
-    if(countOccur(message.split(' '), "catJAM ")){
+    if(countOccur(message.split(' '), "catJAM")){
 
       client.say(channel, "catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM catJAM");
     }
 
-    if(countOccur(message.split(' '), "hryminHype ")){
+    if(countOccur(message.split(' '), "hryminHype")){
 
       client.say(channel, "hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype hryminHype");
     }
@@ -191,8 +207,17 @@ function countOccur(arr, keyword) {
 
 function incrementSeconds() {
   seconds += 1;
-  console.log (seconds);
+  //console.log (seconds);
 }
+
+
+
+var emoteTrain = [];
+
+var seconds = 0;
+var timer = setInterval(incrementSeconds, 1000);
+
+
 
 
  
