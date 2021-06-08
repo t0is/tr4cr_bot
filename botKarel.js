@@ -49,6 +49,7 @@ const client = new tmi.Client({
 
 var emoteTrain = [];
 
+var seconds = 0;
 var timer = setInterval(incrementSeconds, 1000);
 
 
