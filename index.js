@@ -251,8 +251,8 @@ app.listen(port, () => {
             return console.log(err);
         }
         
-        //liveRequest(body.access_token);
-        connectToAllLiveChannels();
+        liveRequest(body.access_token);
+        //connectToAllLiveChannels();
         //console.log(res);
         
       });
