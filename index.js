@@ -17,7 +17,7 @@ var streamersCZ = ['Agraelus', 'CzechCloud', 'ArcadeBulls', 'Freezecz',
 'TenSterakdary', 'nikdohonehleda'].map(v => v.toLowerCase());
 
 var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen', 'KuruHS', 'quickgabi '].map(v => v.toLowerCase());
-var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic'].map(v => v.toLowerCase()); 
+var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic', 'rewinside', 'maxim', 'TolkinLOL', 'Vlesk'].map(v => v.toLowerCase()); 
 var streamersFR = ['Kaydop', 'Ponce', 'Locklear', 'AlfaCast', 'Valouzz'].map(v => v.toLowerCase());
 
 var channelsList = streamersEN.concat(streamersDE, streamersFR, streamersCZ);
@@ -251,7 +251,8 @@ app.listen(port, () => {
             return console.log(err);
         }
         
-        liveRequest(body.access_token);
+        //liveRequest(body.access_token);
+        connectToAllLiveChannels();
         //console.log(res);
         
       });
