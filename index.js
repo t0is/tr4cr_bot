@@ -99,7 +99,7 @@ const youtubeChannels = [
       channelUrl: 'https://www.youtube.com/channel/UCYsS3SON69FIr-K3E3Czvpw'
     },
     {
-      channelName: 'BlastPremier',
+      channelName: 'BLASTPremier YOUTUBE',
       channelId: 'UC9k--dE_UE0Faxzgb_DDkYQ',
       channelUrl: 'https://www.youtube.com/channel/UC9k--dE_UE0Faxzgb_DDkYQ'
       
