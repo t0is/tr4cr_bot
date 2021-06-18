@@ -18,7 +18,7 @@ var streamersCZ = ['Agraelus', 'CzechCloud', 'ArcadeBulls', 'Freezecz',
 
 var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen', 'KuruHS', 'quickgabi', 'blastpremier'].map(v => v.toLowerCase());
 var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic', 'rewinside', 'maxim', 'TolkinLOL', 'Vlesk'].map(v => v.toLowerCase()); 
-var streamersFR = ['Kaydop', 'Ponce', 'Locklear', 'AlfaCast', 'Valouzz'].map(v => v.toLowerCase());
+var streamersFR = ['Kaydop', 'Ponce', 'Locklear', 'AlfaCast', 'Valouzz', 'kamet0', 'shaunz'].map(v => v.toLowerCase());
 
 var channelsList = streamersEN.concat(streamersDE, streamersFR, streamersCZ);
 
