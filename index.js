@@ -20,7 +20,6 @@ var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen', '
 var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic', 'rewinside', 'maxim', 'TolkinLOL', 'Vlesk'].map(v => v.toLowerCase()); 
 var streamersFR = ['Kaydop', 'Ponce', 'Locklear', 'AlfaCast', 'Valouzz', 'kamet0', 'shaunz'].map(v => v.toLowerCase());
 
-var channelsList = streamersEN.concat(streamersDE, streamersFR, streamersCZ);
 
 
 
@@ -336,6 +335,7 @@ client.on('message', (channel, tags, message, self) => {
   if((    message.toLowerCase().includes("madmonq") || 
     message.toLowerCase().includes("madmong") || 
     message.toLowerCase().includes("madmon") || 
+    message.toLowerCase().includes("monq") || 
     message.toLowerCase().includes("mekong")) && 
     (!botIgnore.includes(tags.username.toLowerCase()))
   )
@@ -345,9 +345,47 @@ client.on('message', (channel, tags, message, self) => {
   {
     
     //client.say(channel, 'hueuhe');
+    var sent = false;
+    messageLog.every(function(msgL){
 
-    
-    (async () => {
+        
+      if (msgL.text.toLowerCase().includes(message.toLowerCase())){
+        
+        (async () => {
+
+          var slID = getSlackChannelID(channel.replace('#', '').toLowerCase());
+          const result = await web.reactions.add({
+            name: 'forsene',
+            channel: slID,
+            timestamp: msgL.id
+          }).catch(err => {
+            console.log(err);
+          });
+        
+          // The result contains an identifier for the message, `ts`.
+          //console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
+          
+        })();
+        (async () => {
+
+          var slID = getSlackChannelID(channel.replace('#', '').toLowerCase());
+          const result = await web.chat.postMessage({
+            text: tags.username + ": " + message,
+            channel: slID,
+            thread_ts: msgL.id
+          });
+        
+          // The result contains an identifier for the message, `ts`.
+          console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
+          
+        })();
+        
+        sent = true;
+        return false;
+      }
+    });
+    if (!sent){
+      (async () => {
 
         var msg_output = new slackMessage(tags.username + ": " + message, '');  
         //var msg_output = tags.username + ": " + message;
@@ -364,11 +402,16 @@ client.on('message', (channel, tags, message, self) => {
       console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
       msg_output.id = result.ts;
 
+     
+      
       if (messageLog.length > 200){
           messageLog.pop();
       }
       messageLog.unshift(msg_output);
     })();
+    
+    }
+    
     
  
   }
