@@ -20,6 +20,7 @@ var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen', '
 var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic', 'rewinside', 'maxim', 'TolkinLOL', 'Vlesk'].map(v => v.toLowerCase()); 
 var streamersFR = ['Kaydop', 'Ponce', 'Locklear', 'AlfaCast', 'Valouzz', 'kamet0', 'shaunz'].map(v => v.toLowerCase());
 
+var channelsList = streamersEN.concat(streamersDE, streamersFR, streamersCZ);
 
 
 
