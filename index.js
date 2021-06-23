@@ -382,7 +382,10 @@ console.log("konec, jedem async");
 
 function getSlackChannelID(channel){
 
-  if(streamersCZ.includes(channel)){
+  if (channel === "forsen"){
+    return 'C025X48MUAW';
+  }
+  else if(streamersCZ.includes(channel)){
     return 'C021720QLE8'  // CZ channel slack
   }
   else if(streamersEN.includes(channel)){
