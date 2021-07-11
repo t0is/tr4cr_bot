@@ -25,7 +25,7 @@ var channelsList = streamersEN.concat(streamersDE, streamersFR, streamersCZ);
 
 
 
-//var channelsList = ['nikdohonehleda'];
+//var channelsList = ['nikdohonehleda', 'herdyn'];
 
 var botIgnore = ['oliveruvotrok', 'nightbot', 'streamelements', 'botalfr3d', 'madmonkeyv2'];
 
@@ -37,6 +37,14 @@ class slackMessage {
     constructor(text, id){
         this.text = text;
         this.id = id;
+    }
+}
+
+class liveChannelClass {
+    constructor(channel, ts){
+      this.channel = channel;
+      this.ts = ts;
+
     }
 }
 
@@ -138,11 +146,17 @@ function liveRequest(accessToken){
           try{
             //console.log(res);
             //console.log(JSON.parse(body).data[0].user_name + " " +JSON.parse(body).data[0].type);
-            if (!liveChannels.includes(JSON.parse(body).data[0].user_name)){
-              liveChannels.push(JSON.parse(body).data[0].user_name);
+            var isLiveAlready = liveChannels.find(function(ch, index){
+              if(ch.channel == JSON.parse(body).data[0].user_name.toLowerCase()){
+                return true;
+              }
+            });
 
+            if (typeof isLiveAlready == 'undefined' && JSON.parse(body).data[0].user_name){
+              
               (async () => {
-                var msg_output = JSON.parse(body).data[0].user_name + " is now live on Twitch.";
+                channelToAlertLive = new liveChannelClass(JSON.parse(body).data[0].user_name.toLowerCase(), 0);
+                var msg_output = channelToAlertLive.channel + " is now live on Twitch.";
                 // Post a message to the channel, and await the result.
                 // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
                 const result = await web.chat.postMessage({
@@ -152,6 +166,8 @@ function liveRequest(accessToken){
               
                 // The result contains an identifier for the message, `ts`.
                 console.log(`Successfully send message ${result.ts} in conversation ${slack_online_update}`);
+                channelToAlertLive.ts = result.ts;
+                liveChannels.push(channelToAlertLive);
               })();
               
               //console.log('pagman')
@@ -159,13 +175,38 @@ function liveRequest(accessToken){
             }
             else {
               console.log("furt stejni live: " + liveChannels);
+                            
             }
           
             //console.log('parsnul jsem body'); 
             //return JSON.parse(body).data[0].type === 'live';
           }
           catch (e) {
-            liveChannels = liveChannels.filter(item => item !== streamName)
+            var msgTS = liveChannels.find(function(ch, index){
+              if(ch.channel == streamName){
+                return ch.ts;
+              }
+            });
+
+            liveChannels = liveChannels.filter(item => item.channel !== streamName.toLowerCase());
+
+            if (typeof msgTS !== 'undefined'){
+              (async () => {
+
+                var slID = slack_online_update;
+                const result = await web.reactions.add({
+                  name: 'peeposad',
+                  channel: slID,
+                  timestamp: msgTS.ts
+                }).catch(err => {
+                  console.log(err);
+                });
+              
+                // The result contains an identifier for the message, `ts`.
+                //console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
+                
+              })();
+          }
             //console.log("ZMENAZMENAZMENAZMENAZMENA: " + liveChannels);
             //return null;
           }
@@ -256,7 +297,7 @@ app.listen(port, () => {
         //console.log(res);
         
       });
-    },5000);
+    },10000);
 })
 
 
