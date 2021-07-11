@@ -153,10 +153,12 @@ function liveRequest(accessToken){
             });
 
             if (typeof isLiveAlready == 'undefined' && JSON.parse(body).data[0].user_name){
-              
+              channelToAlertLive = new liveChannelClass(JSON.parse(body).data[0].user_name.toLowerCase(), 0);
+              liveChannels.push(channelToAlertLive);
               (async () => {
-                channelToAlertLive = new liveChannelClass(JSON.parse(body).data[0].user_name.toLowerCase(), 0);
+                var chSaved = channelToAlertLive.channel;
                 var msg_output = channelToAlertLive.channel + " is now live on Twitch.";
+                console.log(msg_output);
                 // Post a message to the channel, and await the result.
                 // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
                 const result = await web.chat.postMessage({
@@ -166,15 +168,22 @@ function liveRequest(accessToken){
               
                 // The result contains an identifier for the message, `ts`.
                 console.log(`Successfully send message ${result.ts} in conversation ${slack_online_update}`);
-                channelToAlertLive.ts = result.ts;
-                liveChannels.push(channelToAlertLive);
+                //channelToAlertLive.ts = result.ts;
+                liveChannels.find(function(ch, index){
+                  if(ch.channel == chSaved){
+                    ch.ts = result.ts;
+                  }
+                })
+                
+                
               })();
-              
+
+             
               //console.log('pagman')
               //slack notif 
             }
             else {
-              console.log("furt stejni live: " + liveChannels);
+              console.log("Already live: " + streamName);
                             
             }
           
