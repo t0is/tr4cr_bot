@@ -65,7 +65,7 @@ const client = new tmi.Client({
     reconnect: true
   },
   identity: {
-    username: 'FlamantBot',
+    username: 'MADMONQ_bot',
     password: process.env.TWITCH_OAUTH_TOKEN
   },
   channels: channelsList
