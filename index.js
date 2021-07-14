@@ -382,7 +382,7 @@ client.on('message', (channel, tags, message, self) => {
     message.toLowerCase().includes("madmon") || 
     message.toLowerCase().includes("monq") || 
     message.toLowerCase().includes("mekong")) && 
-    (!botIgnore.includes(tags.username.toLowerCase()))
+    ((!message.toLowerCase().includes("madmonkeyv2")) && (!botIgnore.includes(tags.username.toLowerCase())))
   )
   
 
