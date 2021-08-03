@@ -116,6 +116,38 @@ client.on('message', (channel, tags, message, self) => {
       //client.say(channel, "/me " + 'hueuhe');
     }
 
+    if(message.toLowerCase().startsWith("!pipík")){
+
+      var input = message.split(' ');
+      var name;
+      if (input.length < 2) 
+        name = tags.username;
+      else 
+        name = input[1];
+
+      const responses = [ 'je bejk, měří neuvěřitelných 30 cm.', 'se díky 8 cm neumístil ani v top 20.', 'se za svůj průměr 12 cm nemusí vůbec stydět. ', 
+      'ohromil Jarmilu 20 cm v pozoru.', 'páni, ten je velkej!','to ani nestojí za řeč, stejně všichni ví, že Kyblh0ven je největší č.. PepeLaugh ']; 
+      
+      client.say(channel, "/me " + name + " " +  responses[Math.floor(Math.random() * responses.length)]);
+    
+      //client.say(channel, "/me " + 'hueuhe');
+    }
+
+    if(message.toLowerCase().startsWith("!číča")){
+
+      var input = message.split(' ');
+      var name;
+      if (input.length < 2) 
+        name = tags.username;
+      else 
+        name = input[1];
+
+      const responses = ['hluboká jak Macocha.', 'strčí Mariánský příkop hravě do kapsy.', 'tam vrazí i kamion. ', 'tak sem se nevejde ani beruška.', '\"Jsi můj první.. Přísahám\" modCheck '];
+      
+      client.say(channel, "/me " + name + " " +  responses[Math.floor(Math.random() * responses.length)]);
+    
+      //client.say(channel, "/me " + 'hueuhe');
+    }
 
     if(message.toLowerCase().startsWith("!miry")){
 
