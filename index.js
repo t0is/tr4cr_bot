@@ -11,13 +11,13 @@ const tmi = require('tmi.js');
 var liveChannels = [];
 
 
-var streamersCZ = ['Agraelus', 'CzechCloud', 'ArcadeBulls', 'Freezecz', 
-'Astatoro', 'Xnapycz','Claina', 'Kokiii_', 'Patrikturi', 'STYKO', 'FlyGunCZ', 'Batmanova', 
-'liveoliverr', 'Artix', 'resttpowered', 'Herdyn', 'spajKK', 'bladeito', 'marty_vole', 
+var streamersCZ = ['Agraelus', 'CzechCloud', 'ArcadeBulls', 'Freezecz',
+'Astatoro', 'Xnapycz','Claina', 'Kokiii_', 'Patrikturi', 'STYKO', 'FlyGunCZ', 'Batmanova',
+'liveoliverr', 'Artix', 'resttpowered', 'Herdyn', 'spajKK', 'bladeito', 'marty_vole',
 'TenSterakdary', 'nikdohonehleda'].map(v => v.toLowerCase());
 
-var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen', 'KuruHS', 'quickgabi', 'blastpremier', 'paoloidolo', '39daph'].map(v => v.toLowerCase());
-var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic', 'rewinside', 'maxim', 'TolkinLOL', 'Vlesk'].map(v => v.toLowerCase()); 
+var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen', 'KuruHS', 'quickgabi', 'blastpremier', 'paoloidolo', '39daph', 'sodapoppin'].map(v => v.toLowerCase());
+var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic', 'rewinside', 'maxim', 'TolkinLOL', 'Vlesk'].map(v => v.toLowerCase());
 var streamersFR = ['Kaydop', 'Ponce', 'Locklear', 'AlfaCast', 'Valouzz', 'kamet0', 'shaunz'].map(v => v.toLowerCase());
 
 var channelsList = streamersEN.concat(streamersDE, streamersFR, streamersCZ);
@@ -69,7 +69,7 @@ const client = new tmi.Client({
     password: process.env.TWITCH_OAUTH_TOKEN
   },
   channels: channelsList
-  
+
   //channels: ['MADMONQ', 'nikdohonehleda']
 });
 
@@ -121,8 +121,8 @@ function liveRequest(accessToken){
 
   channelsList.forEach(streamName => {
         streamName = streamName.replace('#', '');
-   
-    
+
+
       const streamOptions = {
           url: 'https://api.twitch.tv/helix/streams?user_login=' + streamName.toLowerCase(),
           method: 'GET',
@@ -135,14 +135,14 @@ function liveRequest(accessToken){
           console.log("No Token");
       }else{
           //console.log(streamOptions);
-      
+
       const liveRequest = request.get(streamOptions,(err,res,body) => {
           if(err){
               return console.log(err);
           }
-          
+
           //console.log('Status: ${res.statusCode}');
-          
+
           try{
             //console.log(res);
             //console.log(JSON.parse(body).data[0].user_name + " " +JSON.parse(body).data[0].type);
@@ -165,7 +165,7 @@ function liveRequest(accessToken){
                   text: msg_output,
                   channel: slack_online_update
                 });
-              
+
                 // The result contains an identifier for the message, `ts`.
                 console.log(`Successfully send message ${result.ts} in conversation ${slack_online_update}`);
                 //channelToAlertLive.ts = result.ts;
@@ -174,20 +174,20 @@ function liveRequest(accessToken){
                     ch.ts = result.ts;
                   }
                 })
-                
-                
+
+
               })();
 
-             
+
               //console.log('pagman')
-              //slack notif 
+              //slack notif
             }
             else {
               console.log("Already live: " + streamName);
-                            
+
             }
-          
-            //console.log('parsnul jsem body'); 
+
+            //console.log('parsnul jsem body');
             //return JSON.parse(body).data[0].type === 'live';
           }
           catch (e) {
@@ -210,20 +210,20 @@ function liveRequest(accessToken){
                 }).catch(err => {
                   console.log(err);
                 });
-              
+
                 // The result contains an identifier for the message, `ts`.
                 //console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
-                
+
               })();
           }
             //console.log("ZMENAZMENAZMENAZMENAZMENA: " + liveChannels);
             //return null;
           }
         });
-      
+
       };
-    
-    
+
+
 
   });
 }
@@ -239,7 +239,7 @@ async function fetchLiveStreamStatus() {
             const url = `${youtubeApiUrl}&channelId=${youtubeChannel.channelId}&key=${youtubeApiKey}`;
             const response = await fetch(url);
             const myJson = await response.json();
-            
+
             console.log('YouTube Response', JSON.stringify(myJson));
             if(myJson && myJson.pageInfo && myJson.pageInfo.totalResults > 0) {
                 console.log('Found active stream for ', youtubeChannel.channelId);
@@ -259,7 +259,7 @@ async function fetchLiveStreamStatus() {
                             });
                             console.log(`Successfully send message in conversation ${slack_online_update}`);
                             })();
-                        
+
 
                         }
                     } else {
@@ -300,11 +300,11 @@ app.listen(port, () => {
         if(err){
             return console.log(err);
         }
-        
+
         liveRequest(body.access_token);
         //connectToAllLiveChannels();
         //console.log(res);
-        
+
       });
     },10000);
 })
@@ -319,13 +319,13 @@ client.on('message', (channel, tags, message, self) => {
     if(self){
       return;
     }
-    
+
 
     if(tags.username.toLowerCase() === "madmonq"){
 
         var sent = false;
         var uname = message.split(' ')[0].replace('@', '');
-        
+
         messageLog.every(function(msgL){
 
             if(msgL.text.toLowerCase().includes(uname.toLowerCase())){
@@ -339,16 +339,16 @@ client.on('message', (channel, tags, message, self) => {
                     channel: slID,
                     thread_ts: msgL.id
                   });
-                
+
                   // The result contains an identifier for the message, `ts`.
                   console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
-                  
+
                 })();
-                
+
                 sent = true;
                 return false;
             }
-            
+
         });
 
         if (!sent){
@@ -360,12 +360,12 @@ client.on('message', (channel, tags, message, self) => {
                 const result = await web.chat.postMessage({
                   text: channel + "--> " + tags.username + ": " + message,
                   channel: slID,
-                  
+
                 });
-              
+
                 // The result contains an identifier for the message, `ts`.
                 console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
-                
+
               })();
         }
 
@@ -377,25 +377,25 @@ client.on('message', (channel, tags, message, self) => {
 
 
 
-  if((    message.toLowerCase().includes("madmonq") || 
-    message.toLowerCase().includes("madmong") || 
-    message.toLowerCase().includes("madmon") || 
-    message.toLowerCase().includes("monq") || 
-    message.toLowerCase().includes("mekong")) && 
+  if((    message.toLowerCase().includes("madmonq") ||
+    message.toLowerCase().includes("madmong") ||
+    message.toLowerCase().includes("madmon") ||
+    message.toLowerCase().includes("monq") ||
+    message.toLowerCase().includes("mekong")) &&
     ((!message.toLowerCase().includes("madmonkeyv2")) && (!botIgnore.includes(tags.username.toLowerCase())))
   )
-  
+
 
  // if (message.toLowerCase().includes("!dabing"))
   {
-    
+
     //client.say(channel, 'hueuhe');
     var sent = false;
     messageLog.every(function(msgL){
 
-        
+
       if (msgL.text.toLowerCase().includes(message.toLowerCase())){
-        
+
         (async () => {
 
           var slID = getSlackChannelID(channel.replace('#', '').toLowerCase());
@@ -406,10 +406,10 @@ client.on('message', (channel, tags, message, self) => {
           }).catch(err => {
             console.log(err);
           });
-        
+
           // The result contains an identifier for the message, `ts`.
           //console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
-          
+
         })();
         (async () => {
 
@@ -419,12 +419,12 @@ client.on('message', (channel, tags, message, self) => {
             channel: slID,
             thread_ts: msgL.id
           });
-        
+
           // The result contains an identifier for the message, `ts`.
           console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
-          
+
         })();
-        
+
         sent = true;
         return false;
       }
@@ -432,7 +432,7 @@ client.on('message', (channel, tags, message, self) => {
     if (!sent){
       (async () => {
 
-        var msg_output = new slackMessage(tags.username + ": " + message, '');  
+        var msg_output = new slackMessage(tags.username + ": " + message, '');
         //var msg_output = tags.username + ": " + message;
         console.log(channel + "--> " + msg_output.text);
       // Post a message to the channel, and await the result.
@@ -442,23 +442,23 @@ client.on('message', (channel, tags, message, self) => {
         text: channel + "--> " + msg_output.text,
         channel: slID
       });
-    
+
       // The result contains an identifier for the message, `ts`.
       console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
       msg_output.id = result.ts;
 
-     
-      
+
+
       if (messageLog.length > 200){
           messageLog.pop();
       }
       messageLog.unshift(msg_output);
     })();
-    
+
     }
-    
-    
- 
+
+
+
   }
 
 });
@@ -485,7 +485,7 @@ function getSlackChannelID(channel){
   else if(streamersFR.includes(channel)){
     return 'C025309PJ2U'  // FR channel slack
   }
-  
+
 }
 
 
@@ -494,12 +494,12 @@ function getSlackChannelID(channel){
 
 
 //console.log(liveChannels);
-    
 
 
- 
 
- 
+
+
+
 
 
 
