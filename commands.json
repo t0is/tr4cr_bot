@@ -11,10 +11,6 @@
             "text": "Než se zeptáš, podívej se napřed pod stream. Je tam hodně užitečných informací. Pokud nenajdeš, co tě zajímá, ptej se." 
         },
         {
-            "cmd": "!amazon",
-            "text": "Chceš Kerol udělat radost, za kterou bude vrtět zadkem live na streamu? peepoPANTIES Tak vyber něco tady https://www.amazon.de/hz/wishlist/genericItemsPage/1UJ394EDMN74A?ref_=wl_share"
-        },
-        {
             "cmd": "!bedny",
             "text": "Sousedy otravuje luxusní zvuk z beden od Logitech https://www.czc.cz/logitech-z333/156267/produkt?gclid=Cj0KCQiAvvKBBhCXARIsACTePW9UafKWhqagl1ByeK0GAOScDZprHbNE0Jf4Gom0I6AEHUuXva8kHZoaApwHEALw_wcB"
         },
@@ -77,10 +73,6 @@
         {
             "cmd": "!webka",
             "text": "Kerol je tak neodolatelně krásná díky super mega giga nejvíc nejlepší kameře https://www.logitech.com/cs-cz/products/webcams/c922-pro-stream-webcam.960-001088.html"
-        },
-        {
-            "cmd": "!zadek",
-            "text": "Chceš Kerol udělat radost, za kterou bude vrtět zadkem live na streamu? peepoPANTIES Tak vyber něco tady https://www.amazon.de/hz/wishlist/genericItemsPage/1UJ394EDMN74A?ref_=wl_share"
         },
         {
             "cmd": "!zidle",
