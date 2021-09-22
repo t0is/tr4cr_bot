@@ -8,11 +8,7 @@
         },
         {
             "cmd": "!info",
-            "text": "Než se zeptáš, podívej se napřed pod stream. Je tam hodně užitečných informací. Pokud nenajdeš, co tě zajímá, ptej se." 
-        },
-        {
-            "cmd": "!amazon",
-            "text": "Chceš Kerol udělat radost, za kterou bude vrtět zadkem live na streamu? peepoPANTIES Tak vyber něco tady https://www.amazon.de/hz/wishlist/genericItemsPage/1UJ394EDMN74A?ref_=wl_share"
+            "text": "Než se zeptáš, podívej se napřed pod stream. Je tam hodně užitečných informací. Pokud nenajdeš, co tě zajímá, ptej se."
         },
         {
             "cmd": "!bedny",
@@ -79,18 +75,14 @@
             "text": "Kerol je tak neodolatelně krásná díky super mega giga nejvíc nejlepší kameře https://www.logitech.com/cs-cz/products/webcams/c922-pro-stream-webcam.960-001088.html"
         },
         {
-            "cmd": "!zadek",
-            "text": "Chceš Kerol udělat radost, za kterou bude vrtět zadkem live na streamu? peepoPANTIES Tak vyber něco tady https://www.amazon.de/hz/wishlist/genericItemsPage/1UJ394EDMN74A?ref_=wl_share"
-        },
-        {
-            "cmd": "!zidle",
-            "text": "Chceš Kerol udělat radost, za kterou bude vrtět zadkem live na streamu? peepoPANTIES Tak vyber něco tady https://www.amazon.de/hz/wishlist/genericItemsPage/1UJ394EDMN74A?ref_=wl_share"
-        },
-        {
             "cmd": "!tancuj",
             "text": "pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD pepeD"
+        },
+        {
+            "cmd": "!koule",
+            "text": "https://clips.twitch.tv/LightSeductiveBubbleteaBigBrother-pEGBfz2XPIvu0N7k Hryzej mi do kulí"
         }
-        
+
     ]
 
 }
