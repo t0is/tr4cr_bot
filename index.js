@@ -102,13 +102,18 @@ const youtubeChannels = [
         channelName: 'DuklockPlus',
         channelId: 'UCIAbC7emlDQs-dmgW4GlgnA',
         channelUrl: 'https://www.youtube.com/channel/UCIAbC7emlDQs-dmgW4GlgnA'
-    },
+    }
+];
+
+/*
+,
     {
       channelName: 'Sterakdary',
       channelId: 'UCYsS3SON69FIr-K3E3Czvpw',
       channelUrl: 'https://www.youtube.com/channel/UCYsS3SON69FIr-K3E3Czvpw'
     }
-];
+
+*/
 
 let activeLiveStreams = new Set();
 
@@ -370,9 +375,29 @@ client.on('message', (channel, tags, message, self) => {
 
               })();
         }
-
-
     }
+
+    if(tags.username.toLowerCase() === "MADMONQ_Padawan"){
+
+      var uname = message.split(' ')[0].replace('@', '');
+
+      (async () => {
+
+          var slID = "C02JHLEBB0D";
+          const result = await web.chat.postMessage({
+            text: channel + "--> " + tags.username + ": " + message,
+            channel: slID,
+
+          });
+
+          // The result contains an identifier for the message, `ts`.
+          console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
+
+        })();
+  }
+
+
+
 
 
 
@@ -474,9 +499,6 @@ function getSlackChannelID(channel){
 
   if (channel === "forsen"){
     return 'C025X48MUAW';
-  }
-  else if (channel === "MADMONQ_Padawan"){
-    return 'C02JHLEBB0D';
   }
   else if(streamersCZ.includes(channel)){
     return 'C021720QLE8';  // CZ channel slack
