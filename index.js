@@ -20,7 +20,9 @@ var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen', '
 var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic', 'rewinside', 'maxim', 'TolkinLOL', 'Vlesk'].map(v => v.toLowerCase());
 var streamersFR = ['Kaydop', 'Ponce', 'Locklear', 'AlfaCast', 'Valouzz', 'kamet0', 'shaunz','jbzzed'].map(v => v.toLowerCase());
 
-var channelsList = streamersEN.concat(streamersDE, streamersFR, streamersCZ);
+var test_account = ['MADMONQ_Padawan'];
+
+var channelsList = streamersEN.concat(streamersDE, streamersFR, streamersCZ, test_account);
 
 
 
@@ -473,17 +475,20 @@ function getSlackChannelID(channel){
   if (channel === "forsen"){
     return 'C025X48MUAW';
   }
+  else if (channel === "MADMONQ_Padawan"){
+    return 'C02JHLEBB0D';
+  }
   else if(streamersCZ.includes(channel)){
-    return 'C021720QLE8'  // CZ channel slack
+    return 'C021720QLE8';  // CZ channel slack
   }
   else if(streamersEN.includes(channel)){
-    return 'C024KAVJFL4'  // EN channel slack
+    return 'C024KAVJFL4';  // EN channel slack
   }
   else if(streamersDE.includes(channel)){
-    return 'C024A3TBNNR'  // DE channel slack
+    return 'C024A3TBNNR';  // DE channel slack
   }
   else if(streamersFR.includes(channel)){
-    return 'C025309PJ2U'  // FR channel slack
+    return 'C025309PJ2U';  // FR channel slack
   }
 
 }
