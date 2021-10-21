@@ -70,9 +70,9 @@ const client = new tmi.Client({
     username: 'MADMONQ_bot',
     password: process.env.TWITCH_OAUTH_TOKEN
   },
-  channels: channelsList
+  //channels: channelsList
 
-  //channels: ['MADMONQ', 'nikdohonehleda']
+  channels: ['MADMONQ', 'nikdohonehleda']
 });
 
 const fetch = require("node-fetch");
@@ -377,7 +377,7 @@ client.on('message', (channel, tags, message, self) => {
         }
     }
 
-    if(tags.username.toLowerCase() === "MADMONQ_Padawan"){
+    if(tags.username.toLowerCase() === "madmonq_padawan"){
 
       var uname = message.split(' ')[0].replace('@', '');
 
