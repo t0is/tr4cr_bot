@@ -70,9 +70,9 @@ const client = new tmi.Client({
     username: 'MADMONQ_bot',
     password: process.env.TWITCH_OAUTH_TOKEN
   },
-  //channels: channelsList
+  channels: channelsList
 
-  channels: ['MADMONQ', 'nikdohonehleda']
+  //channels: ['MADMONQ', 'nikdohonehleda']
 });
 
 const fetch = require("node-fetch");
