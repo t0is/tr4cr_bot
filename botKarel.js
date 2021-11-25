@@ -187,6 +187,7 @@ client.on('message', (channel, tags, message, self) => {
       "Nezlobte se – ale neprdla jste si? Úplně jste mě totiž smetla…",
       "Nechceš jít ke mně a kouknout se na nějaké porno na mém 52palcovém zrcadle?",
       "Pokud bys byla můj domácí úkol, tak bych tě udělal na pracovním stole.",
+      "Slečno, vy máte v kapse zdrcátko? Já jen že už se vidím ve vašich kalhotkách.",
       "Je to jen mnou nebo si tě všichni chlapi představují nahou?",
       "Nechme mezi naší láskou stát pouze latex.",
       "Nepracuješ ve starožitnictví? Protože mám v kalhotách něco, čeho se už pár let nikdo nedotkl.",
@@ -235,6 +236,7 @@ client.on('message', (channel, tags, message, self) => {
       "Jak se jmenuješ? Chci se ujistit, že dnes večer budu křičet správné jméno.",
       "Já nejsem opilý – to ty jsi mě omámila!",
       "Prej dělám strašně hezký děti.",
+      "Patříš k těm lepším, co jsem kdy měl.",
       "Zrovna jsem si dal Viagru, takže máme asi 30 minut na to, abychom se dostali k tobě domů.",
       "Ahoj ty vypadáš jako slušná holka, která by se nevyspala s někým, koho nezná. Takže já jsem Tomáš",
       "Ahoj, dovolte mi, abych se vás na něco zeptal .. záleží opravdu na velikosti?",
@@ -245,6 +247,7 @@ client.on('message', (channel, tags, message, self) => {
       "Jsi sobecká. To tělo budeš mít po zbytek života a já ho chci jen na jednu noc.",
       "Kdepak, já vám nekoukám na prsa! Já vám hledím na srdce…",
       "Musíš být opravdu unavená, protože jsi mi celou noc běžela v mysli.",
+      "Venku svítí slunce ,co kdyby sis potěžkala mého sumce",
       "Ne že bych se na vás snažil dělat dojem nebo tak, ale… já jsem Batman!",
       "Nejsem meteorolog, ale řekl bych, že dnes v noci můžeme očekávat pár decimetrů.",
       "Nejste náhodou dekoratérka interiérů? Protože když jste vešla, celá místnost rázem zkrásněla…",
@@ -261,10 +264,16 @@ client.on('message', (channel, tags, message, self) => {
       "Ty jsi víc sexy než moje dcera!",
       "Ztratil jsem klíče, nemůžu se ti podívat do kalhot?",
       "Kolik mě budeš stát na večer?",
+      "Ženy, co mají knírek, jsou prý vášnivé.",
       "Nechceš vidět můj přetaktovanej procák?",
       "Zapomněl jsem své telefonní číslo, mohl bych dostat tvoje?",
       "Máš pěkné nohy, kdy mají otvírací dobu?",
-      "Kdyby si byla úhloměr a já úhel, tak zjistíš, že já jsem ten pravý."
+      "Kdyby si byla úhloměr a já úhel, tak zjistíš, že já jsem ten pravý.",
+      "Nejsi náhodou provaz? Já jen, že bych s tebou rád navázal kontakt.",
+      "Nejsi náhodou bazén? Já jen, že bych se v tobě rád vyčvachtal.",
+      "Nejsi náhodou sebevražda? Já jen, že na tebe myslím každý den.",
+      "Jé, vy máte krásného pejska. Můžu si vás pohladit?",
+
       ];
 
 
