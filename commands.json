@@ -1,7 +1,5 @@
-
-
 {
-    "commandList":[
+    "commandList": [
         {
             "cmd": "!adost",
             "text": "Fakt se na to vyser bráško WeirdChamp"
@@ -13,10 +11,6 @@
         {
             "cmd": "!bedny",
             "text": "Sousedy otravuje luxusní zvuk z beden od Logitech https://www.czc.cz/logitech-z333/156267/produkt?gclid=Cj0KCQiAvvKBBhCXARIsACTePW9UafKWhqagl1ByeK0GAOScDZprHbNE0Jf4Gom0I6AEHUuXva8kHZoaApwHEALw_wcB"
-        },
-        {
-            "cmd": "!kamera",
-            "text": "Pro ten nejvíc neojstřejší z ostrých obrazů ever Kappa https://www.alza.cz/unibos-master-stream-webcam-1080p-d6217866.htm"
         },
         {
             "cmd": "!kdo",
@@ -48,7 +42,7 @@
         },
         {
             "cmd": "!setup",
-            "text": "GRAFIKA - GIGABYTE GeForce GTX 1660 OC 6G, CASE - GameMax Aurora / W901, ZDROJ - SilverStone Strider Essential 80Plus ST60F-ES230 600W, PROCESOR - AMD RYZEN 3 3100, MOTHERBOARD - ASROCK Fatal1ty B450 Gaming K4, DISK - Seagate BarraCuda 1TB, RAM - Corsair 16GB KIT DDR4 3200MHz CL16 Vengeance LPX"
+            "text": "GRAFIKA - GIGABYTE GeForce GTX 1660 OC 6G, CASE - GameMax Aurora / W901, ZDROJ - SilverStone Strider Essential 80Plus ST60F-ES230 600W, PROCESOR - AMD RYZEN 5 5600X, MOTHERBOARD - ASROCK Fatal1ty B450 Gaming K4, DISK - Seagate BarraCuda 1TB, RAM - Corsair 16GB KIT DDR4 3200MHz CL16 Vengeance LPX"
         },
         {
             "cmd": "!shop",
@@ -82,7 +76,5 @@
             "cmd": "!koule",
             "text": "https://clips.twitch.tv/LightSeductiveBubbleteaBigBrother-pEGBfz2XPIvu0N7k Hryzej mi do kulí"
         }
-
     ]
-
 }
