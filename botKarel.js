@@ -328,6 +328,20 @@ client.on('message', (channel, tags, message, self) => {
       client.say(channel, "/me " + name + " má " + Math.floor(iq) + " mozkových buněk.");
     }
 
+    if(message.toLowerCase().startsWith("!chlast")){
+
+      var input = message.split(' ');
+      var name;
+      if (input.length < 2)
+        name = tags.username;
+      else
+        name = input[1];
+
+      var iq=Math.round(Math.random(10)*5);
+
+      client.say(channel, "/me " + name + " má " + Math.floor(iq) + " ‰");
+    }
+
 
 
 
