@@ -14,11 +14,11 @@ var liveChannels = [];
 var streamersCZ = ['Agraelus', 'CzechCloud', 'ArcadeBulls', 'Freezecz',
 'Astatoro', 'Xnapycz','Claina', 'Kokiii_', 'Patrikturi', 'STYKO', 'FlyGunCZ', 'Batmanova',
 'liveoliverr', 'Artix', 'resttpowered', 'Herdyn', 'spajKK', 'bladeito', 'marty_vole',
-'TenSterakdary', 'nikdohonehleda'].map(v => v.toLowerCase());
+'TenSterakdary', 'tom__mm'].map(v => v.toLowerCase());
 
 var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen', 'KuruHS', 'quickgabi', 'blastpremier', 'paoloidolo', '39daph', 'sodapoppin'].map(v => v.toLowerCase());
 var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic', 'rewinside', 'maxim', 'TolkinLOL', 'Vlesk'].map(v => v.toLowerCase());
-var streamersFR = ['Kaydop', 'Ponce', 'Locklear', 'AlfaCast', 'Valouzz', 'kamet0', 'shaunz','jbzzed'].map(v => v.toLowerCase());
+var streamersFR = ['Kaydop', 'Ponce', 'Locklear', 'AlfaCast', 'Valouzz', 'kamet0', 'shaunz','jbzzed', 'nisqyy'].map(v => v.toLowerCase());
 
 var test_account = ['MADMONQ_Padawan'];
 
