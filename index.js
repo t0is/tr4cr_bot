@@ -27,7 +27,7 @@ var channelsList = streamersEN.concat(streamersDE, streamersFR, streamersCZ, tes
 
 
 
-//var channelsList = ['tom_mm', 'herdyn'];
+//var channelsList = ['tom__mm', 'herdyn'];
 
 var botIgnore = ['oliveruvotrok', 'nightbot', 'streamelements', 'botalfr3d', 'madmonkeyv2'];
 
@@ -72,7 +72,7 @@ const client = new tmi.Client({
   },
   channels: channelsList
 
-  //channels: ['MADMONQ', 'tom_mm']
+  //channels: ['MADMONQ', 'tom__mm']
 });
 
 const fetch = require("node-fetch");
@@ -396,7 +396,7 @@ client.on('message', (channel, tags, message, self) => {
         })();
   }
 
-  if(tags.username.toLowerCase() === "tom_mm"){
+  if(tags.username.toLowerCase() === "tom__mm"){
 
     var uname = message.split(' ')[0].replace('@', '');
 
