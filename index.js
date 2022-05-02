@@ -27,7 +27,7 @@ var channelsList = streamersEN.concat(streamersDE, streamersFR, streamersCZ, tes
 
 
 
-//var channelsList = ['nikdohonehleda', 'herdyn'];
+//var channelsList = ['tom_mm', 'herdyn'];
 
 var botIgnore = ['oliveruvotrok', 'nightbot', 'streamelements', 'botalfr3d', 'madmonkeyv2'];
 
@@ -72,7 +72,7 @@ const client = new tmi.Client({
   },
   channels: channelsList
 
-  //channels: ['MADMONQ', 'nikdohonehleda']
+  //channels: ['MADMONQ', 'tom_mm']
 });
 
 const fetch = require("node-fetch");
@@ -394,6 +394,25 @@ client.on('message', (channel, tags, message, self) => {
           console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
 
         })();
+  }
+
+  if(tags.username.toLowerCase() === "tom_mm"){
+
+    var uname = message.split(' ')[0].replace('@', '');
+
+    (async () => {
+
+        var slID = "C03DQ7MC3HR";
+        const result = await web.chat.postMessage({
+          text: channel + "--> " + tags.username + ": " + message,
+          channel: slID,
+
+        });
+
+        // The result contains an identifier for the message, `ts`.
+        console.log(`Successfully send message ${result.ts} in conversation ${slID}`);
+
+      })();
   }
 
 
