@@ -396,7 +396,7 @@ client.on('message', (channel, tags, message, self) => {
         })();
   }
 
-  if(tags.username.toLowerCase() === "tom__mm"){
+  if(tags.username.toLowerCase() === "cherrinka"){
 
     var uname = message.split(' ')[0].replace('@', '');
 
