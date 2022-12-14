@@ -20,7 +20,8 @@ var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen', '
   'paoloidolo', '39daph', 'sodapoppin', 'nymn'].map(v => v.toLowerCase());
 var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic', 'rewinside', 'maxim', 'TolkinLOL', 'Vlesk'].map(v => v.toLowerCase());
 var streamersFR = ['Kaydop', 'Ponce', 'Locklear', 'AlfaCast', 'Valouzz', 'kamet0',
- 'shaunz', 'jbzzed', 'nisqyy', 'skyyart', 'jladz', 'dye_live', 'chewbydslife', 'aloonea', 'thomacky'].map(v => v.toLowerCase());
+ 'shaunz', 'jbzzed', 'nisqyy', 'skyyart', 'jladz', 'dye_live', 'chewbydslife', 'aloonea', 'thomacky',
+ 'amobones', 'loupiote3', 'nawk_', 'yoona'].map(v => v.toLowerCase());
 
 var test_account = ['MADMONQ_Padawan'];
 
