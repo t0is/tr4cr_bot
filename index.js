@@ -17,7 +17,7 @@ var streamersCZ = ['Agraelus', 'CzechCloud', 'ArcadeBulls', 'Freezecz',
   'TenSterakdary', 'amfikcz', 'tom__mm'].map(v => v.toLowerCase());
 
 var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen', 'KuruHS', 'quickgabi',
-  'paoloidolo', '39daph', 'sodapoppin', 'nymn', 'knut', 'nmplol', 'rachtaz'].map(v => v.toLowerCase());
+  'paoloidolo', '39daph', 'sodapoppin', 'nymn', 'knut', 'nmplol', 'rachtaz', 'delaney'].map(v => v.toLowerCase());
 var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic', 'rewinside', 'maxim', 'TolkinLOL', 'Vlesk'].map(v => v.toLowerCase());
 var streamersFR = ['Kaydop', 'Ponce', 'Locklear', 'AlfaCast', 'Valouzz', 'kamet0',
  'shaunz', 'jbzzed', 'nisqyy', 'skyyart', 'jladz', 'dye_live', 'chewbydslife', 'aloonea', 'thomacky',
