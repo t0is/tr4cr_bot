@@ -80,6 +80,7 @@ const client = new tmi.Client({
 
 const fetch = require("node-fetch");
 const express = require('express')
+const bodyParser = require('body-parser')
 const app = express();
 const port = process.env.PORT || 3000;
 //const herokuApp = process.env.HEROKU_APP || null;
@@ -88,6 +89,9 @@ const youtubeFetchTimeout = 1500000;
 const web = new WebClient(slack_token);
 const slack_channel_ID = 'C021720QLE8';
 const slack_online_update = 'C0225846R9B';
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false }))
 
 
 ///////TEST TEST TEST///////
@@ -302,25 +306,30 @@ async function fetchLiveStreamStatus() {
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}!`);
-  setInterval(fetchLiveStreamStatus, youtubeFetchTimeout);
+  //setInterval(fetchLiveStreamStatus, youtubeFetchTimeout);
 
   // check jestli je live
-  setInterval(() => {
-    request.post(options, (err, res, body) => {
-      if (err) {
-        return console.log(err);
-      }
+  // setInterval(() => {
+  //   request.post(options, (err, res, body) => {
+  //     if (err) {
+  //       return console.log(err);
+  //     }
 
-      liveRequest(body.access_token);
-      //connectToAllLiveChannels();
-      //console.log(res);
+  //     liveRequest(body.access_token);
+  //     //connectToAllLiveChannels();
+  //     //console.log(res);
 
-    });
-  }, 10000);
+  //   });
+  // }, 10000);
+})
+
+app.post('/', (req, res) => {
+  let data = req.body;
+  res.send('Data Received: ' + JSON.stringify(data));
 })
 
 
-client.connect();
+//client.connect();
 
 
 client.on('message', (channel, tags, message, self) => {
