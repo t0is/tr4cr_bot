@@ -49,7 +49,7 @@ for (let prop in streamers) {
     }
 }
 
-var botIgnore = ['oliveruvotrok', 'nightbot', 'streamelements', 'botalfr3d', 'madmonkeyv2'];
+var botIgnore = ['oliveruvotrok', 'nightbot', 'streamelements', 'botalfr3d', 'madmonkeyv2', 'moobot'];
 
 
 var messageLog = [];
