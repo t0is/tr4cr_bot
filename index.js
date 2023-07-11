@@ -317,7 +317,7 @@ app.post('/rmstreamer', (req, res) => {
 
 
 app.post('/streamers', (req, res) => {
-
+    let resp_str = "";
     for (let key in streamers) {
       if (streamers.hasOwnProperty(key)) {
           resp_str += `\n\nStreamers from ${key}:\n`;
