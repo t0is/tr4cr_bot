@@ -12,9 +12,11 @@ const fs = require('fs');
 // https setup
 var http = require('http');
 var https = require('https');
-var privateKey  = fs.readFileSync('ssl/key.pem', 'utf8');
-var certificate = fs.readFileSync('ssl/cert.pem', 'utf8');
-var credentials = {key: privateKey, cert: certificate};
+
+var credentials = {
+  key: fs.readFileSync('/etc/letsencrypt/live/madmonqslackapp.online/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/madmonqslackapp.online/fullchain.pem')
+}
 
 
 var liveChannels = [];
@@ -92,7 +94,7 @@ const fetch = require("node-fetch");
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 443;
 //const herokuApp = process.env.HEROKU_APP || null;
 const youtubeFetchTimeout = 1500000;
 
@@ -105,6 +107,7 @@ app.use(bodyParser.urlencoded({extended: false }))
 
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
+
 // httpServer.listen(8080);
 
 
