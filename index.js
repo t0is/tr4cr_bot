@@ -18,6 +18,11 @@ var credentials = {
   cert: fs.readFileSync('/etc/letsencrypt/live/madmonqslackapp.online/fullchain.pem')
 }
 
+// var credentials = {
+//   key: fs.readFileSync('ssl/key.pem'),
+//   cert: fs.readFileSync('ssl/cert.pem')
+// }
+
 
 var liveChannels = [];
 
@@ -329,7 +334,7 @@ app.post('/streamers', (req, res) => {
 
 
 
-//client.connect();
+client.connect();
 
 
 client.on('message', (channel, tags, message, self) => {
