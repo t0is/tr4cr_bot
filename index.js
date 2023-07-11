@@ -287,12 +287,14 @@ app.post('/addstreamer', (req, res) => {
     console.log(`Joined ${newChannelName}`);
 
     // Add the new channel to the streamers object
-    addNewChannel(newChannelName, channel_lang)
-
-    // Overwrite the JSON file with the updated list
-    fs.writeFileSync('streamers.json', JSON.stringify(streamers));
-
-    res.send(`Joined ${newChannelName} and added it to the list.`);
+    let add_res = addNewChannel(newChannelName, channel_lang)
+    
+    if (add_res) {
+      res.send(`Joined ${newChannelName} and added it to the list.`);
+    }
+    else {
+      res.send(`${newChannelName} already present. Skipped.`);
+    }
     
 
   }).catch((err) => {
@@ -303,11 +305,15 @@ app.post('/addstreamer', (req, res) => {
 app.post('/rmstreamer', (req, res) => {
   const params = req.body.text.split(' ');
   let channelNameToLeave = params[0];
+  console.log(`parting ${channelNameToLeave}`);
   // Leave the channel
   client.part(channelNameToLeave).then((data) => {
 
     // Remove the channel from the streamers object
-    streamers = streamers.filter(channel => channel !== channelNameToLeave);
+
+    for(let key in streamers){
+      streamers[key] = streamers[key].filter(channel => channel !== channelNameToLeave);
+    }
 
     // Overwrite the JSON file with the updated list
     fs.writeFileSync('streamers.json', JSON.stringify(streamers));
@@ -322,11 +328,17 @@ app.post('/rmstreamer', (req, res) => {
 
 
 app.post('/streamers', (req, res) => {
+  const params = req.body.text.split(' ');
+  let channel_param = params[0];
+
     let resp_str = "";
     for (let key in streamers) {
       if (streamers.hasOwnProperty(key)) {
-          resp_str += `\n\nStreamers from ${key}:\n`;
-          resp_str += JSON.stringify(streamers[key], null, 2);
+        if(channel_param.trim() != "" && !key.toLowerCase().includes(channel_param.toLowerCase())) {
+          continue;
+        }
+        resp_str += `\n\nStreamers from ${key}:\n`;
+        resp_str += JSON.stringify(streamers[key], null, 2);
       }
     }
     res.send(resp_str);
@@ -560,7 +572,15 @@ function addNewChannel(channel_name, channel_lang) {
   for (let key in streamers) {
     if (streamers.hasOwnProperty(key)) {
       if(key.toLowerCase().includes(channel_lang.toLowerCase())) {
-        streamers[key].push(channel_name.toLowerCase())
+        if(!streamers[key].includes(channel_name.toLowerCase())) {
+          streamers[key].push(channel_name.toLowerCase());
+          fs.writeFileSync('streamers.json', JSON.stringify(streamers));
+          return true;
+        }
+        else {
+          return false;
+        }
+        
       }
     }
   }
