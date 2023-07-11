@@ -541,16 +541,16 @@ function getSlackChannelID(channel) {
   if (channel === "forsen") {
     return 'C025X48MUAW';
   }
-  else if (streamersCZ.includes(channel)) {
+  else if (streamers.streamersCZ.includes(channel)) {
     return 'C021720QLE8';  // CZ channel slack
   }
-  else if (streamersEN.includes(channel)) {
+  else if (streamers.streamersEN.includes(channel)) {
     return 'C024KAVJFL4';  // EN channel slack
   }
-  else if (streamersDE.includes(channel)) {
+  else if (streamers.streamersDE.includes(channel)) {
     return 'C024A3TBNNR';  // DE channel slack
   }
-  else if (streamersFR.includes(channel)) {
+  else if (streamers.streamersFR.includes(channel)) {
     return 'C025309PJ2U';  // FR channel slack
   }
 
