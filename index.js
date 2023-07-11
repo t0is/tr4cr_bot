@@ -101,11 +101,10 @@ const bodyParser = require('body-parser')
 const app = express();
 const port = process.env.PORT || 443;
 //const herokuApp = process.env.HEROKU_APP || null;
-const youtubeFetchTimeout = 1500000;
 
 const web = new WebClient(slack_token);
-// const slack_channel_ID = 'C021720QLE8';
-// const slack_online_update = 'C0225846R9B';
+const slack_channel_ID = 'C021720QLE8';
+const slack_online_update = 'C0225846R9B';
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false }))
@@ -119,8 +118,8 @@ var httpsServer = https.createServer(credentials, app);
 
 ///////TEST TEST TEST///////
 
-const slack_channel_ID = 'C02JHLEBB0D';
-const slack_online_update = 'C02JHLEBB0D';
+// const slack_channel_ID = 'C02JHLEBB0D';
+// const slack_online_update = 'C02JHLEBB0D';
 
 
 function liveRequest(accessToken) {
@@ -251,21 +250,19 @@ function liveRequest(accessToken) {
 
 httpsServer.listen(port, () => {
   console.log(`App listening on port ${port}!`);
-  //setInterval(fetchLiveStreamStatus, youtubeFetchTimeout);
-
   // check jestli je live
-  // setInterval(() => {
-  //   request.post(options, (err, res, body) => {
-  //     if (err) {
-  //       return console.log(err);
-  //     }
+  setInterval(() => {
+    request.post(options, (err, res, body) => {
+      if (err) {
+        return console.log(err);
+      }
 
-  //     liveRequest(body.access_token);
-  //     //connectToAllLiveChannels();
-  //     //console.log(res);
+      liveRequest(body.access_token);
+      //connectToAllLiveChannels();
+      //console.log(res);
 
-  //   });
-  // }, 10000);
+    });
+  }, 10000);
 })
 
 app.post('/', (req, res) => {
@@ -540,7 +537,7 @@ client.on('message', (channel, tags, message, self) => {
 
 
 function getSlackChannelID(channel) {
-  return "C02JHLEBB0D";
+  // return "C02JHLEBB0D";
   if (channel === "forsen") {
     return 'C025X48MUAW';
   }
@@ -558,12 +555,6 @@ function getSlackChannelID(channel) {
   }
 
 }
-
-
-
-
-
-
 
 
 
