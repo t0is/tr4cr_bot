@@ -20,11 +20,12 @@ var streamersCZ = ['Agraelus', 'CzechCloud', 'ArcadeBulls', 'Freezecz',
 
 var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen', 'KuruHS', 'quickgabi',
   'paoloidolo', '39daph', 'sodapoppin', 'nymn', 'knut', 'nmplol', 'rachtaz', 'delaney',
-  'hydervrsi', 'Flatz00', 'kharliito', 'pawkt', 'stabitabi', 'thehollowedknight'].map(v => v.toLowerCase());
+  'hydervrsi', 'Flatz00', 'kharliito', 'pawkt', 'stabitabi', 'thehollowedknight', 'wakewilder', 'vadikus007',
+  'jaystreazy', 'mhyochi', 'esfandtv', 'cooksux', 'vei', 'ntbees', 'nmplol', 'yabbe'].map(v => v.toLowerCase());
 var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic', 'rewinside', 'maxim', 'TolkinLOL', 'Vlesk'].map(v => v.toLowerCase());
 var streamersFR = ['Kaydop', 'Ponce', 'Locklear', 'AlfaCast', 'Valouzz', 'kamet0',
  'shaunz', 'jbzzed', 'nisqyy', 'skyyart', 'jladz', 'dye_live', 'chewbydslife', 'aloonea', 'thomacky',
- 'amobones', 'loupiote3', 'nawk_', 'yoona', 'adztv', 'helydia '].map(v => v.toLowerCase());
+ 'amobones', 'loupiote3', 'nawk_', 'yoona', 'adztv', 'helydia', 'kaffworld', 'levraidoffy', 'sniper_biscuit', 'azuma'].map(v => v.toLowerCase());
 
 var test_account = ['MADMONQ_Padawan'];
 
