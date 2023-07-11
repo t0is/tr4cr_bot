@@ -7,30 +7,40 @@ const request = require("request");
 const async = require("async");
 var accessToken = '';
 const tmi = require('tmi.js');
+const fs = require('fs');
+
+// https setup
+var http = require('http');
+var https = require('https');
+var privateKey  = fs.readFileSync('ssl/key.pem', 'utf8');
+var certificate = fs.readFileSync('ssl/cert.pem', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
+
 
 var liveChannels = [];
 
 
-var streamersCZ = ['Agraelus', 'CzechCloud', 'ArcadeBulls', 'Freezecz',
-  'Astatoro', 'Xnapycz', 'Claina', 'Kokiii_', 'Patrikturi', 'STYKO', 'FlyGunCZ', 'Batmanova',
-  'liveoliverr', 'Artix', 'resttpowered', 'Herdyn', 'spajKK', 'bladeito', 'marty_vole',
-  'TenSterakdary', 'amfikcz', 'tom__mm'].map(v => v.toLowerCase());
-
-var streamersEN = ['PimpCSGO', 'dafran', 'LexVeldhuis', 'Mrtweeday', 'forsen', 'KuruHS', 'quickgabi',
-  'paoloidolo', '39daph', 'sodapoppin', 'nymn', 'knut', 'nmplol', 'rachtaz', 'delaney'].map(v => v.toLowerCase());
-var streamersDE = ['papaplatte', 'revedtv', 'mirza_jahic', 'rewinside', 'maxim', 'TolkinLOL', 'Vlesk'].map(v => v.toLowerCase());
-var streamersFR = ['Kaydop', 'Ponce', 'Locklear', 'AlfaCast', 'Valouzz', 'kamet0',
- 'shaunz', 'jbzzed', 'nisqyy', 'skyyart', 'jladz', 'dye_live', 'chewbydslife', 'aloonea', 'thomacky',
- 'amobones', 'loupiote3', 'nawk_', 'yoona', 'adztv'].map(v => v.toLowerCase());
-
-var test_account = ['MADMONQ_Padawan'];
-
-var channelsList = streamersEN.concat(streamersDE, streamersFR, streamersCZ, test_account);
 
 
 
+// Read and parse the JSON file
+let rawdata = fs.readFileSync('streamers.json');
+let streamers = JSON.parse(rawdata);
 
-//var channelsList = ['tom__mm', 'herdyn'];
+// Convert the streamers to lowercase
+for (let prop in streamers) {
+  if (streamers.hasOwnProperty(prop) && Array.isArray(streamers[prop])) {
+      streamers[prop] = streamers[prop].map(v => v.toLowerCase());
+  }
+}
+
+let channelsList = [];
+
+for (let prop in streamers) {
+    if (streamers.hasOwnProperty(prop) && Array.isArray(streamers[prop])) {
+      channelsList = channelsList.concat(streamers[prop]);
+    }
+}
 
 var botIgnore = ['oliveruvotrok', 'nightbot', 'streamelements', 'botalfr3d', 'madmonkeyv2'];
 
@@ -87,48 +97,26 @@ const port = process.env.PORT || 3000;
 const youtubeFetchTimeout = 1500000;
 
 const web = new WebClient(slack_token);
-const slack_channel_ID = 'C021720QLE8';
-const slack_online_update = 'C0225846R9B';
+// const slack_channel_ID = 'C021720QLE8';
+// const slack_online_update = 'C0225846R9B';
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false }))
 
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+// httpServer.listen(8080);
+
+
 
 ///////TEST TEST TEST///////
 
-//const slack_channel_ID = 'C022500TU15';
-//const slack_online_update = 'C022500TU15';
+const slack_channel_ID = 'C02JHLEBB0D';
+const slack_online_update = 'C02JHLEBB0D';
 
-const youtubeApiKey = process.env.YOUTUBE_API_KEY;
-const youtubeApiUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&eventType=live&type=video';
+
 //const discordApiKey = process.env.DISCORD_API_KEY;
 //const discordApiUrl = `https://discordapp.com/api/webhooks/${discordApiKey}`;
-
-const youtubeChannels = [
-  {
-    channelName: 'DuklockPlus',
-    channelId: 'UCIAbC7emlDQs-dmgW4GlgnA',
-    channelUrl: 'https://www.youtube.com/channel/UCIAbC7emlDQs-dmgW4GlgnA'
-  }
-];
-
-/*
-,
-    {
-      channelName: 'Sterakdary',
-      channelId: 'UCYsS3SON69FIr-K3E3Czvpw',
-      channelUrl: 'https://www.youtube.com/channel/UCYsS3SON69FIr-K3E3Czvpw'
-    }
-
-*/
-
-let activeLiveStreams = new Set();
-
-
-
-
-
-
 
 
 function liveRequest(accessToken) {
@@ -245,51 +233,6 @@ function liveRequest(accessToken) {
 /////////////////////////////////////////////
 
 
-async function fetchLiveStreamStatus() {
-  try {
-    for (const youtubeChannel of youtubeChannels) {
-      //const youtubeChannel = youtubeChannels[0];
-      console.log('Polling for ', JSON.stringify(youtubeChannel));
-      const url = `${youtubeApiUrl}&channelId=${youtubeChannel.channelId}&key=${youtubeApiKey}`;
-      const response = await fetch(url);
-      const myJson = await response.json();
-
-      console.log('YouTube Response', JSON.stringify(myJson));
-      if (myJson && myJson.pageInfo && myJson.pageInfo.totalResults > 0) {
-        console.log('Found active stream for ', youtubeChannel.channelId);
-        myJson.items.forEach(element => {
-          if (!activeLiveStreams.has(element.id.videoId)) {
-            console.log(element);
-            activeLiveStreams.add(element.id.videoId);
-            if (!liveChannels.includes(youtubeChanel.channelName)) {
-              liveChannels.push(youtubeChanel.channelName);
-              (async () => {
-                var msg_output = youtubeChanel.channelName + "is now live on YouTube.";
-                // Post a message to the channel, and await the result.
-                // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
-                const result = await web.chat.postMessage({
-                  text: msg_output,
-                  channel: slack_online_update
-                });
-                console.log(`Successfully send message in conversation ${slack_online_update}`);
-              })();
-
-
-            }
-          } else {
-            console.log(`Already alerted for this livestream ${element.id.videoId}. Skipping.`);
-          }
-        });
-      }
-      else {
-        console.log(youtubeChanel.channelName + 'not active now');
-        liveChannels = liveChannels.filter(item => item !== dukName);
-      }
-    }
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 
 
@@ -302,9 +245,7 @@ async function fetchLiveStreamStatus() {
 
 
 
-
-
-app.listen(port, () => {
+httpsServer.listen(port, () => {
   console.log(`App listening on port ${port}!`);
   //setInterval(fetchLiveStreamStatus, youtubeFetchTimeout);
 
@@ -327,6 +268,74 @@ app.post('/', (req, res) => {
   let data = req.body;
   res.send('Data Received: ' + JSON.stringify(data));
 })
+
+app.post('/test', (req, res) => {
+  let data = req.body;
+  res.send('Got test message, sending response. Hello World.');
+})
+
+app.post('/addstreamer', (req, res) => {
+  let newChannelName = req.body.text;
+
+  client.join(newChannelName).then((data) => {
+    console.log(`Joined ${newChannelName}`);
+
+    // Add the new channel to the streamers object
+    addNewChannel(newChannelName, channel_lang)
+
+    // Overwrite the JSON file with the updated list
+    fs.writeFileSync('streamers.json', JSON.stringify(streamers));
+
+    res.send(`Joined ${newChannelName} and added it to the list.`);
+    
+
+  }).catch((err) => {
+    res.send(`Error: ${err.message}`);
+  });
+})
+
+app.post('/rmstreamer', (req, res) => {
+  let channelNameToLeave = req.body.test;
+  // Leave the channel
+  client.part(channelNameToLeave).then((data) => {
+
+    // Remove the channel from the streamers object
+    streamers = streamers.filter(channel => channel !== channelNameToLeave);
+
+    // Overwrite the JSON file with the updated list
+    fs.writeFileSync('streamers.json', JSON.stringify(streamers));
+
+    res.send(`Left ${channelNameToLeave}`);
+
+  }).catch((err) => {
+    res.send(`Error: ${err.message}`);
+  });
+})
+
+
+
+app.post('/streamers', (req, res) => {
+  let channelNameToLeave = req.body.test;
+  // Leave the channel
+  client.part(channelNameToLeave).then((data) => {
+
+    // Remove the channel from the streamers object
+    streamers = streamers.filter(channel => channel !== channelNameToLeave);
+    let resp_str = "";
+    // Overwrite the JSON file with the updated list
+    for (let key in streamers) {
+      if (streamers.hasOwnProperty(key)) {
+          resp_str += `\n\nStreamers from ${key}:\n`;
+          resp_str += JSON.stringify(streamers[key], null, 2);
+      }
+    }
+    res.send(resp_str);
+
+  }).catch((err) => {
+    res.send(`Error: ${err.message}`);
+  });
+})
+
 
 
 //client.connect();
@@ -515,19 +524,15 @@ client.on('message', (channel, tags, message, self) => {
 
     }
 
-
-
   }
 
 });
-
-console.log("konec, jedem async");
 
 
 
 
 function getSlackChannelID(channel) {
-
+  return "C02JHLEBB0D";
   if (channel === "forsen") {
     return 'C025X48MUAW';
   }
@@ -551,14 +556,16 @@ function getSlackChannelID(channel) {
 
 
 
-//console.log(liveChannels);
 
 
 
 
-
-
-
-
-
-
+function addNewChannel(channel_name, channel_lang) {
+  for (let key in streamers) {
+    if (streamers.hasOwnProperty(key)) {
+      if(key.toLowerCase().includes(channel_lang.toLowerCase())) {
+        streamers[key].push(channel_name.toLowerCase())
+      }
+    }
+  }
+}
