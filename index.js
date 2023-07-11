@@ -118,10 +118,6 @@ const slack_channel_ID = 'C02JHLEBB0D';
 const slack_online_update = 'C02JHLEBB0D';
 
 
-//const discordApiKey = process.env.DISCORD_API_KEY;
-//const discordApiUrl = `https://discordapp.com/api/webhooks/${discordApiKey}`;
-
-
 function liveRequest(accessToken) {
 
   channelsList.forEach(streamName => {
@@ -278,7 +274,9 @@ app.post('/test', (req, res) => {
 })
 
 app.post('/addstreamer', (req, res) => {
-  let newChannelName = req.body.text;
+  const params = req.body.text.split(' ');
+  let newChannelName = params[0];
+  let channel_lang = params[1];
 
   client.join(newChannelName).then((data) => {
     console.log(`Joined ${newChannelName}`);
@@ -298,7 +296,8 @@ app.post('/addstreamer', (req, res) => {
 })
 
 app.post('/rmstreamer', (req, res) => {
-  let channelNameToLeave = req.body.test;
+  const params = req.body.text.split(' ');
+  let channelNameToLeave = params[0];
   // Leave the channel
   client.part(channelNameToLeave).then((data) => {
 
@@ -318,14 +317,7 @@ app.post('/rmstreamer', (req, res) => {
 
 
 app.post('/streamers', (req, res) => {
-  let channelNameToLeave = req.body.test;
-  // Leave the channel
-  client.part(channelNameToLeave).then((data) => {
 
-    // Remove the channel from the streamers object
-    streamers = streamers.filter(channel => channel !== channelNameToLeave);
-    let resp_str = "";
-    // Overwrite the JSON file with the updated list
     for (let key in streamers) {
       if (streamers.hasOwnProperty(key)) {
           resp_str += `\n\nStreamers from ${key}:\n`;
@@ -333,10 +325,6 @@ app.post('/streamers', (req, res) => {
       }
     }
     res.send(resp_str);
-
-  }).catch((err) => {
-    res.send(`Error: ${err.message}`);
-  });
 })
 
 
