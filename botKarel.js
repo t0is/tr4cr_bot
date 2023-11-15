@@ -345,7 +345,7 @@ client.on('message', (channel, tags, message, self) => {
 
 
 
-    if(message.toLowerCase().includes("just tipped CZK 666")){
+    if(message.toLowerCase().includes("just tipped czk 666")){
 
       var input = message.split(' ');
       var name = input[0];
