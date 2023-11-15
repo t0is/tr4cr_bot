@@ -350,7 +350,7 @@ client.on('message', (channel, tags, message, self) => {
       var input = message.split(' ');
       var name = input[0];
 
-      client.say(channel, "Shoutout pro Bloodwërk – songa z alertu https://open.spotify.com/track/5cLY4XfQEjAkcx7vvamhQn?si=0a30f61ccb894002");
+      client.say(channel, "Shoutout pro Bloodwërk – songa z alertu https://open.spotify.com/track/5cLY4XfQEjAkcx7vvamhQn?si=0a30f61ccb894002 pepeJAM");
     }
 
 
