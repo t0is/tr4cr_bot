@@ -76,7 +76,9 @@ client.on('message', (channel, tags, message, self) => {
         name = input[1];
 
       const responses = [ 'je bejk, měří neuvěřitelných 30 cm.', 'se díky 8 cm neumístil ani v top 20.', 'se za svůj průměr 12 cm nemusí vůbec stydět. ',
-      'ohromil Jarmilu 20 cm v pozoru.', 'páni, ten je velkej!','to ani nestojí za řeč, stejně všichni ví, že Kyblh0ven je největší č.. PepeLaugh '];
+      'ohromil Jarmilu 20 cm v pozoru.', 'páni, ten je velkej!','to ani nestojí za řeč, stejně všichni ví, že Kyblh0ven je největší č.. PepeLaugh ',
+      'má asijský průměr, neurazí, nenadchne!', 'jak to říct.. inu, když začne pršet, pozná to jako první.', '15,6 cm, dá se!', 'Náš Matěj, ten ho má dlouhatej.. pepeJAM ',
+      ];
 
       client.say(channel, "/me " + name + " " +  responses[Math.floor(Math.random() * responses.length)]);
 
@@ -92,7 +94,9 @@ client.on('message', (channel, tags, message, self) => {
       else
         name = input[1];
 
-      const responses = ['hluboká jak Macocha.', 'strčí Mariánský příkop hravě do kapsy.', 'tam vrazí i kamion. ', 'tak sem se nevejde ani beruška.', '\"Jsi můj první.. Přísahám\" modCheck '];
+      const responses = ['hluboká jak Macocha.', 'strčí Mariánský příkop hravě do kapsy.', 'tam vrazí i kamion. ', 'tak sem se nevejde ani beruška.', 
+      '\"Jsi můj první.. Přísahám\" modCheck ', 'Nemůžeme posoudit hloubku této krásné ženy, neb blanka ještě nebyla protržena.', 'Jen dva prstíčky tam strčíme a hned zase půjdeme.',
+      'Páni! Je tu tma! A PAVOUCI!!!', 'Hlubší než Samařina studna.', 'Zavolejte Mauglího, je třeba zkrotit anakondu.'];
 
       client.say(channel, "/me " + name + " " +  responses[Math.floor(Math.random() * responses.length)]);
 
@@ -125,8 +129,9 @@ client.on('message', (channel, tags, message, self) => {
       else
         name = input[1];
 
-      const responses = [ 'je bejk, měří neuvěřitelných 30 cm.', 'se díky 8 cm neumístil ani v top 20.', 'se za svůj průměr 12 cm nemusí vůbec stydět. ',
-      'ohromil Jarmilu 20 cm v pozoru.', 'páni, ten je velkej!','to ani nestojí za řeč, stejně všichni ví, že Kyblh0ven je největší č.. PepeLaugh '];
+        const responses = [ 'je bejk, měří neuvěřitelných 30 cm.', 'se díky 8 cm neumístil ani v top 20.', 'se za svůj průměr 12 cm nemusí vůbec stydět. ',
+        'ohromil Jarmilu 20 cm v pozoru.', 'páni, ten je velkej!','to ani nestojí za řeč, stejně všichni ví, že Kyblh0ven je největší č.. PepeLaugh ',
+        'má asijský průměr, neurazí, nenadchne!', 'jak to říct.. inu, když začne pršet, pozná to jako první.'];
 
       client.say(channel, "/me " + name + " " +  responses[Math.floor(Math.random() * responses.length)]);
 
@@ -142,7 +147,7 @@ client.on('message', (channel, tags, message, self) => {
       else
         name = input[1];
 
-      const responses = ['hluboká jak Macocha.', 'strčí Mariánský příkop hravě do kapsy.', 'tam vrazí i kamion. ', 'tak sem se nevejde ani beruška.', '\"Jsi můj první.. Přísahám\" modCheck '];
+      const responses = ['Chlupatá, chlupatá je. Bembeřice! ', 'Jemný růžový tenoučký roastbeef.', 'Oholená na dvanáctku, gratulujeme. ', 'Pysky jak dva řízky, kááámo!'];
 
       client.say(channel, "/me " + name + " " +  responses[Math.floor(Math.random() * responses.length)]);
 
